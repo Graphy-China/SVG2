@@ -1,5 +1,5 @@
 
-*.user
+*.pro.user
 *~
 opencv/images/
 opencv/*/build_*/
