@@ -52,11 +52,38 @@ void MainWindow::on_FlipXY_clicked()
     process(IMG_FLIPXY);
 }
 
+void MainWindow::on_SaltBtn_clicked()
+{
+    if( !image.data)
+        return;
+    processSalt(3000);
+}
+
+
+
 void MainWindow::process(IMG_FLIP method)
 {
     if(!image.data)
         return;
     cv::flip(image, image, method);
+    updateCanvas();
+}
+
+void MainWindow::processSalt(int n)
+{
+    if(!image.data)
+        return;
+    for (int k=0; k<n; ++k) {
+        int x = rand()%image.cols;
+        int y = rand()%image.rows;
+        if(image.channels() == 1) {
+            image.at<uchar>(y,x) = 255;
+        } else if(image.channels() == 3) {
+            cv::Vec3b& rgb = image.at<cv::Vec3b>(y,x);
+            rgb[0]=255; rgb[1]=255; rgb[2]=255;
+        }
+    }
+
     updateCanvas();
 }
 
@@ -71,3 +98,4 @@ void MainWindow::updateCanvas()
     ui->ImageCanvas->setPixmap(QPixmap::fromImage(img));
     ui->ImageCanvas->resize(ui->ImageCanvas->pixmap()->size());
 }
+

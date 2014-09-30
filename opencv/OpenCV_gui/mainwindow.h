@@ -26,6 +26,8 @@ private slots:
 
     void on_FlipXY_clicked();
 
+    void on_SaltBtn_clicked();
+
 private:
     typedef enum {
         IMG_FLIPX = 1,
@@ -34,6 +36,7 @@ private:
     } IMG_FLIP;
 
     void process(IMG_FLIP method);
+    void processSalt(int n);
     void updateCanvas();
 
 private:
