@@ -96,12 +96,18 @@ void MainWindow::processSalt(int n)
 void MainWindow::processReduceColor(int div)
 {
     int nl = image.rows;
-    int nc = image.cols*image.channels();
+    int nc = image.cols;
+
+    assert(image.channels()==3);
 
     for (int y=0; y<nl; ++y) {
-        uchar* row = image.ptr<uchar>(y);
+        //uchar* row = image.ptr<uchar>(y);
         for(int x=0; x<nc; ++x) {
-            row[x] = row[x]/div*div + div/2;
+            cv::Vec3b& pixel = image.at<cv::Vec3b>(y,x);
+            pixel[0] = pixel[0]/div*div + div/2;
+            pixel[1] = pixel[1]/div*div + div/2;
+            pixel[2] = pixel[2]/div*div + div/2;
+            //row[x] = row[x]/div*div + div/2;
         }
     }
 
