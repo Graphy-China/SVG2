@@ -1,5 +1,8 @@
 
 *.pro.user
 *~
+*.o
+Makefile
+moc*
 opencv/images/
 opencv/*/build_*/

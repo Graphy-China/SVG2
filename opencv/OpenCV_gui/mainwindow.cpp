@@ -9,9 +9,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->FlipX->setCheckable(false);
-    ui->FlipY->setCheckable(false);
-    ui->FlipXY->setCheckable(false);
+    ui->FlipX->setEnabled(false);
+    ui->FlipY->setEnabled(false);
+    ui->FlipXY->setEnabled(false);
 }
 
 MainWindow::~MainWindow()
@@ -26,30 +26,15 @@ void MainWindow::on_OpenImageBtn_clicked()
     if(img.data) {
         image = img;
         updateCanvas();
-        ui->FlipX->setCheckable(true);
-        ui->FlipY->setCheckable(true);
-        ui->FlipXY->setCheckable(true);
+        ui->FlipX->setEnabled(true);
+        ui->FlipY->setEnabled(true);
+        ui->FlipXY->setEnabled(true);
+        // not work
+        ui->FlipX->setChecked(false);
+        ui->FlipY->setChecked(false);
+        ui->FlipXY->setChecked(false);
     }
 
-}
-
-void MainWindow::process(IMG_FLIP method)
-{
-    if(!image.data)
-        return;
-    cv::flip(image, image, method);
-    updateCanvas();
-}
-
-void MainWindow::updateCanvas()
-{
-    // 1. opencv's pixel: BGR.
-    // 2.cvtColor is declared in imgproc/imgproc.hpp.
-    assert(image.data);
-    cv::cvtColor(image, image, CV_BGR2RGB);
-    QImage img= QImage((const unsigned char*)(image.data),image.cols,image.rows,QImage::Format_RGB888);
-    ui->ImageCanvas->setPixmap(QPixmap::fromImage(img));
-    ui->ImageCanvas->resize(ui->ImageCanvas->pixmap()->size());
 }
 
 void MainWindow::on_FlipX_clicked()
@@ -65,4 +50,24 @@ void MainWindow::on_FlipY_clicked()
 void MainWindow::on_FlipXY_clicked()
 {
     process(IMG_FLIPXY);
+}
+
+void MainWindow::process(IMG_FLIP method)
+{
+    if(!image.data)
+        return;
+    cv::flip(image, image, method);
+    updateCanvas();
+}
+
+void MainWindow::updateCanvas()
+{
+    // 1. opencv's pixel: BGR.
+    // 2.cvtColor is declared in imgproc/imgproc.hpp.
+    assert(image.data);
+    cv::Mat result;
+    cv::cvtColor(image, result, CV_BGR2RGB);
+    QImage img= QImage((const unsigned char*)(result.data),result.cols,result.rows,QImage::Format_RGB888);
+    ui->ImageCanvas->setPixmap(QPixmap::fromImage(img));
+    ui->ImageCanvas->resize(ui->ImageCanvas->pixmap()->size());
 }
