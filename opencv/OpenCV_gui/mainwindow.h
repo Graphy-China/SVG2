@@ -28,6 +28,8 @@ private slots:
 
     void on_SaltBtn_clicked();
 
+    void on_ReduceBtn_clicked();
+
 private:
     typedef enum {
         IMG_FLIPX = 1,
@@ -37,6 +39,7 @@ private:
 
     void process(IMG_FLIP method);
     void processSalt(int n);
+    void processReduceColor(int div);
     void updateCanvas();
 
 private:

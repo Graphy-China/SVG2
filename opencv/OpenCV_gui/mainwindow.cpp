@@ -59,6 +59,14 @@ void MainWindow::on_SaltBtn_clicked()
     processSalt(3000);
 }
 
+void MainWindow::on_ReduceBtn_clicked()
+{
+    if(!image.data)
+        return;
+
+    processReduceColor(64);
+    updateCanvas();
+}
 
 
 void MainWindow::process(IMG_FLIP method)
@@ -71,8 +79,6 @@ void MainWindow::process(IMG_FLIP method)
 
 void MainWindow::processSalt(int n)
 {
-    if(!image.data)
-        return;
     for (int k=0; k<n; ++k) {
         int x = rand()%image.cols;
         int y = rand()%image.rows;
@@ -87,6 +93,22 @@ void MainWindow::processSalt(int n)
     updateCanvas();
 }
 
+void MainWindow::processReduceColor(int div)
+{
+    int nl = image.rows;
+    int nc = image.cols*image.channels();
+
+    for (int y=0; y<nl; ++y) {
+        uchar* row = image.ptr<uchar>(y);
+        for(int x=0; x<nc; ++x) {
+            row[x] = row[x]/div*div + div/2;
+        }
+    }
+
+    updateCanvas();
+}
+
+
 void MainWindow::updateCanvas()
 {
     // 1. opencv's pixel: BGR.
@@ -98,4 +120,5 @@ void MainWindow::updateCanvas()
     ui->ImageCanvas->setPixmap(QPixmap::fromImage(img));
     ui->ImageCanvas->resize(ui->ImageCanvas->pixmap()->size());
 }
+
 
