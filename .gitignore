@@ -5,4 +5,4 @@
 Makefile
 moc*
 opencv/images/
-opencv/*/build_*/
+opencv/*/build*/
