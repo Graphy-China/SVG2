@@ -9,3 +9,9 @@
  2.3 Cany:  http://dasl.mem.drexel.edu/alumni/bGreen/www.pages.drexel.edu/_weg22/can_tut.html
  2.4 TRIPOD Laplace: http://dasl.mem.drexel.edu/alumni/bGreen/www.pages.drexel.edu/_weg22/TRIPODlaplace.html
 
+-----------------------------------------------------------------
+3. CV Related resources
+-----------------------------------------------------------------
+ 3.1 http://www.shervinemami.info/
+ 3.2 http://www.shervinemami.info/openCV.html
+ 3.3 http://homepages.inf.ed.ac.uk/rbf/CVonline/
