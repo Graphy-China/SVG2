@@ -19,10 +19,13 @@ HEADERS  += mainwindow.h
 
 FORMS    += mainwindow.ui
 
-INCLUDEPATH += /usr/local/include
-LIBS += -L/usr/local/lib \
--lopencv_core \
--lopencv_highgui \
--lopencv_imgproc \
--lopencv_features2d \
--lopencv_calib3d
+#OPENCV_INST_DIR = /usr/local
+OPENCV_DIR = C:/OpenCV/opencv/build
+
+INCLUDEPATH += C:/OpenCV/opencv/build/include
+LIBS += -LC:/OpenCV/opencv/build/x86/vc11/lib \
+-lopencv_core249 \
+-lopencv_highgui249 \
+-lopencv_imgproc249 \
+-lopencv_features2d249 \
+-lopencv_calib3d249
